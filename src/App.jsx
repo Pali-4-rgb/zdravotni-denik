@@ -105,7 +105,7 @@ export default function App() {
     <div className="app">
       <header className="appHeader">
         <h1>Zdravotní deník</h1>
-        <p>Webová verze pro iPhone</p>
+        <p>Webová verze</p>
       </header>
 
       <main className="appMain">
@@ -306,7 +306,7 @@ function PersonEditor({ person, onClose, onSave }) {
       allergies: textToArray(allergies),
       medication: textToArray(medication),
       limitations: textToArray(limitations),
-      emergencyContacts: textToArray(emergencyContacts),
+      emergencyContacts: contactsTextToArray(emergencyContacts),
       notes: notes.trim(),
     });
   };
@@ -437,4 +437,15 @@ function textToArray(value) {
     .split("\n")
     .map((item) => item.trim())
     .filter(Boolean);
+}
+function contactsTextToArray(value) {
+  return value
+    .split("\n")
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .map((item) => ({
+      role: "Rodič",
+      name: "",
+      phone: item,
+    }));
 }
