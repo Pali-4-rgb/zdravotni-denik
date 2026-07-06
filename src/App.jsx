@@ -237,17 +237,34 @@ function PersonDetail({ person, onClose, onEdit, onDelete }) {
         <DetailSection title="💊 Léky" items={person.medication} />
         <DetailSection title="🚫 Omezení" items={person.limitations} />
 
-        {person.emergencyContacts?.length > 0 && (
-          <section className="detailSection">
-            <h3>📞 Kontakty</h3>
-            {person.emergencyContacts.map((contact, index) => (
-              <p key={index}>
-                <strong>{contact.role}:</strong> {contact.name}
-                {contact.phone ? ` – ${contact.phone}` : ""}
-              </p>
-            ))}
-          </section>
-        )}
+       {person.emergencyContacts?.length > 0 && (
+  <section className="detailSection">
+    <h3>📞 Kontakty</h3>
+
+    {person.emergencyContacts.map((contact, index) => {
+      const phone = contact.phone || "";
+      const cleanPhone = phone.replace(/\s+/g, "");
+
+      return (
+        <p key={index}>
+          {(contact.role || contact.name) && (
+            <>
+              <strong>{contact.role || "Kontakt"}:</strong>{" "}
+              {contact.name || ""}
+              {phone ? " – " : ""}
+            </>
+          )}
+
+          {phone && (
+            <a href={`tel:${cleanPhone}`} className="phoneLink">
+              {phone}
+            </a>
+          )}
+        </p>
+      );
+    })}
+  </section>
+)}
 
         {person.notes && (
           <section className="detailSection note">

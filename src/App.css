@@ -318,3 +318,12 @@ textarea {
   font-weight: 700;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
+.phoneLink {
+  color: #1f6feb;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.phoneLink:hover {
+  text-decoration: underline;
+}
